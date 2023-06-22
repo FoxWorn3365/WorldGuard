@@ -101,6 +101,9 @@ To contribute to the code, it is mandatory to meet these parameters:
 | English (US) | `en` | [FoxWorn3365](https://github.com/FoxWorn3365) |
 | Italian (IT) | `it` | [FoxWorn3365](https://github.com/FoxWorn3365) |
 
+## Useful links
+- [Poggit CI page](https://poggit.pmmp.io/ci/FoxWorn3365/WorldGuard/);
+- [Poggit](https://poggit.pmmp.io/)
 ## Contacts
 Feel free to contact me via:
 - Discord: `@foxworn`
