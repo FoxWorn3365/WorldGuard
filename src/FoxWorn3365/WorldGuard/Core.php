@@ -191,7 +191,7 @@ class Core extends PluginBase implements Listener {
                 $name = $this->positioning->{$sender->getName()}->n;
                 $region = new RegionManager($this->getDataFolder());
                 // We need to do this shit to create the region status ew
-                $regiononononononon = $region->create($name, $this->positioning->{$sender->getName()}->a, Factory::object(['x' => $sender->getPosition()->getX(), 'z' => $sender->getPosition()->getZ()]), $sender);
+                $region = $region->create($name, $this->positioning->{$sender->getName()}->a, Factory::object(['x' => $sender->getPosition()->getX(), 'z' => $sender->getPosition()->getZ()]), $sender);
                 if ($region instanceof RegionManager) {
                     $this->regions->{$name} = $region;
                     $sender->sendMessage("§a" . $this->lan->get('second-point-defined') . " X:{$sender->getPosition()->getX()}, Z:{$sender->getPosition()->getZ()}");
@@ -339,7 +339,6 @@ class Core extends PluginBase implements Listener {
         if (method_exists($event, 'getPlayer')) {
             $player = $event->getPlayer();
             if ($event->getPlayer()->hasPermission("worldguard.bypass")) {
-                die();
                 return;
             }
         }
