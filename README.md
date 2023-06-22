@@ -1,5 +1,5 @@
 # WorldGuard
-Protect specific regions from one or more events with **WorldGuard** for PocketMine-MP!&lt;br&gt;
+Protect specific regions from one or more events with **WorldGuard** for PocketMine-MP!<br>
 
 ⚠️ We are not in any way related to the [WorldGuard plugin](https://dev.bukkit.org/projects/worldguard) for Bukkit!
 
@@ -104,6 +104,7 @@ To contribute to the code, it is mandatory to meet these parameters:
 ## Useful links
 - [Poggit CI page](https://poggit.pmmp.io/ci/FoxWorn3365/WorldGuard/);
 - [Poggit](https://poggit.pmmp.io/)
+
 ## Contacts
 Feel free to contact me via:
 - Discord: `@foxworn`
