@@ -329,9 +329,13 @@ class Core extends PluginBase implements Listener {
     }
 
     // Event Handler 
-    protected function eventHandler(Event $event) : void {
+    protected function eventHandler($event) : void {
         $name = $event->getEventName();
         $eventName = explode('\\', $name)[3];
+
+        $player = null;
+        $position = null;
+
         if (method_exists($event, 'getPlayer')) {
             $player = $event->getPlayer();
             if ($event->getPlayer()->hasPermission("worldguard.bypass")) {
