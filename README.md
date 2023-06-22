@@ -65,25 +65,25 @@ I welcome any contribution and here are two guides for contribution:
 If you decided to help with the translation then free to create a pull request where you edit the `src/FoxWorn3365/WorldGuard/languages.json` file and also the `README.md` updating the list of translators by adding the language.<br>
 The name must follow [ISO 639-1](https://it.wikipedia.org/wiki/ISO_639) standards or [ISO 639-2](https://it.wikipedia.org/wiki/ISO_639-2) in the case of dialects.<br>
 Correct: 
-```json
+```
 [...]
     "roa":{ // The ligurian language, a dialect
       [...]
 ```
 Correct:
-```json
+```
 [...]
     "es":{ // Spanish language, a global and official language
     [...]
 ```
 Wrong:
-```json
+```
 [...]
     "roa-IT":{ // Yes, Ligurian is an Italian dialect but the format is wrong!
     [...]
 ```
 Wrong:
-```json
+```
 [...]
     "spa":{ // Yes, this is also a global language (spanish) BUT because of this it's mandatory to use the ISO 639 standard!
     [...]
