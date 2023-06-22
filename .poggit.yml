@@ -1,6 +1,6 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/FoxWorn3365/WorldGuard
 build-by-default: true
-pulls:true
+pulls: true
 branches:
 - main
 projects:
