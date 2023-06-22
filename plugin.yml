@@ -1,0 +1,45 @@
+name: WorldGuard
+version: 0.7.0
+api: 5.0.0
+main: FoxWorn3365\WorldGuard\Core
+author: FoxWorn3365
+website: https://github.com/FoxWorn3365/WorldGuard
+description: Deny some events in a 2D area!
+
+commands:
+  worldguard:
+    description: Display info about WorldGuard or set a pos
+    usage: "/worldguard [info|pos1|pos2]"
+    aliases:
+      - wg
+    permission: worldguard.base
+    permission-message: "§cYou do not have permission to use this command!"
+  region:
+    description: The WorldGuard's region command
+    usage: "/region [list|create|info|remove|flags] <REGION>"
+    aliases:
+      - wgrg
+      - rg
+    permission: worldguard.region
+    permission-message: "§cYou do not have permission to use this command!"
+  flags:
+    description: Command for WorldGuard's region flag management
+    usage: "/flags <REGION> <FLAG>"
+    aliases:
+      - wgf
+    permission: worldguard.region.flags
+    permission-message: "§cYou do not have permission to use this command!"
+
+permissions:
+  worldguard.base:
+    description: "Allows users to use the base command"
+    default: op
+  worldguard.region:
+    description: "Allows users to use the  region command"
+    default: op
+  worldguard.region.flags:
+    description: "Allows users to manage flags"
+    default: op
+  worldguard.bypass:
+    description: "Allow users to bypass a region's flag"
+    default: false
