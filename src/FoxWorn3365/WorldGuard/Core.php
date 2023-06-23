@@ -106,7 +106,7 @@ class Core extends PluginBase implements Listener {
     protected string $defaultConfig = "IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjCiMjICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIwojIyAgXCAgICAgICAgICAgICAgICAvICAgICstLS0tLS0tICAgIyMKIyMgICBcICAgICAgICAgICAgICAvICAgICB8ICAgICAgICAgICMjCiMjICAgIFwgICAgICAgICAgICAvICAgICAgfCAgICAgICAgICAjIwojIyAgICAgXCAgICAvXCAgICAvICAgICAgIHwgICAtLS0rICAgIyMKIyMgICAgICBcICAvICBcICAvICAgICAgICB8ICAgICAgfCAgICMjCiMjICAgICAgIFwvICAgIFwvICAgICAgICAgKy0tLS0tLSsgICAjIwojIyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyMKIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjCiMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIwojICAgIFdvcmxkR3VhcmQgZm9yIFBvY2tldE1pbmUtTVAgICAgICMKIyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwojIEF1dGhvcjogRm94V29ybjMzNjUKIyAgICAgICB8IGh0dHBzOi8vZ2l0aHViLmNvbS9Gb3hXb3JuMzM2NQojIEdpdEh1YjogaHR0cHM6Ly9naXRodWIuY29tL0ZveFdvcm4zMzY1L1dvcmxkR3VhcmQKIyBSZWxhc2VkIHVuZGVyIHRoZSBBR1BMIExpY2Vuc2UKIyBodHRwczovL2dpdGh1Yi5jb20vRm94V29ybjMzNjUvV29ybGRHdWFyZC9MSUNFTlNFCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwoKZW5hYmxlZDogdHJ1ZSAgIyBXaGV0aGVyIHRoZSBwbHVnaW4gaXMgZW5hYmxlZApsYW5ndWFnZTogZW4gICAjIFNlbGVjdCB0aGUgbGFuZ3VhZ2UKCmRlbmllZC1tZXNzYWdlOiBTb3JyeSBidXQgeW91IGNhbm5vdCBkbyB0aGlzIGFjdGlvbiEKCmN1c3RvbS1kZW5pZWQtbWVzc2FnZToKICBibG9ja19wbGFjZTogU29ycnkgYnV0IHlvdSBjYW5ub3QgcGxhY2UgYmxvY2tzIGhlcmUh";
 
     protected const AUTHOR = "FoxWorn3365";
-    protected const VERSION = "0.9.1-pre-relase";
+    protected const VERSION = "0.9.2-pre-relase";
 
     public function onLoad() : void {
         $this->regions = new \stdClass;
@@ -248,7 +248,7 @@ class Core extends PluginBase implements Listener {
             $sender->sendMessage("Region: §l{$name}§r\nWorld: {$region->getWorld()}\nPlayers: " .implode("\n - ", $region->getPlayers()) ."\nFlags:\n" . implode(' ,', $region->getFlags()));
         } elseif ($args[0] === "flags") {
             if (empty($name)) {
-                $sender->sendMessage("§c" . $this->lan->get('no-name-defined') . "\n§rUsage: /region info <NAME>");
+                $sender->sendMessage("§c" . $this->lan->get('no-name-defined') . "\n§rUsage: /region flags <NAME>\nAlias: /flags <NAME>");
                 return;
             } 
             // Get config and generate info
@@ -262,7 +262,7 @@ class Core extends PluginBase implements Listener {
         } elseif ($args[0] === "delete" || $args[0] === "remove") {
             // Delete a region
             if (empty($name)) {
-                $sender->sendMessage("§c" . $this->lan->get('no-name-defined') . "\n§rUsage: /region info <NAME>");
+                $sender->sendMessage("§c" . $this->lan->get('no-name-defined') . "\n§rUsage: /region remove <NAME>");
                 return;
             } 
             // Get config and generate info
@@ -275,7 +275,7 @@ class Core extends PluginBase implements Listener {
             $sender->sendMessage("§a" . $this->lan->get('region-deleted', ['rname' => $name]));
         } elseif ($args[0] === "player" && !empty($args[1]) && !empty($args[2])) {
             if (empty($name)) {
-                $sender->sendMessage("§c" . $this->lan->get('no-name-defined') . "\n§rUsage: /region info <NAME>");
+                $sender->sendMessage("§c" . $this->lan->get('no-name-defined') . "\n§rUsage: /region player <REGION NAME> <PLAYER NAME>");
                 return;
             } 
             // Check presence
@@ -293,6 +293,8 @@ class Core extends PluginBase implements Listener {
                 $this->regions->{$name}->addPlayer($player);
                 $sender->sendMessage("§c" . $this->lan->get('player-added', ['pname' => $player]));
             }
+        } else {
+            $sender->sendMessage("Usage: /rg [info|create|list|flags|delete|player] <REGION>");
         }
     }
 
