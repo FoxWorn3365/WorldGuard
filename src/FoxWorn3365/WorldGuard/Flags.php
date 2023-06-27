@@ -52,7 +52,6 @@ class Flags {
         'player_bucket_fill' => 'PlayerBucketFill',
         'player_bucket_empty' => 'PlayerBucketEmpty',
         'player_chat' => 'PlayerChat',
-        'player_death' => 'PlayerDeath',
         'player_drop_item' => 'PlayerDropItem',
         'player_edit_book' => 'PlayerEditBook',
         'player_emote' => 'PlayerEmote',
@@ -63,7 +62,6 @@ class Flags {
         'player_item_consume' => 'PlayerItemConsume',
         'player_item_use' => 'PlayerItemUse',
         'player_item_held' => 'PlayerItemHeld',
-        'player_jump' => 'PlayerJump',
         'player_move' => 'PlayerMove'
     ];
 

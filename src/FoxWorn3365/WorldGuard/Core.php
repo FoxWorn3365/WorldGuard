@@ -68,7 +68,6 @@ use pocketmine\event\inventory\CraftItemEvent;
 
 // Player events
 use pocketmine\event\player\PlayerMoveEvent;
-use pocketmine\event\player\PlayerJumpEvent;
 use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
 use pocketmine\event\player\PlayerItemConsumeEvent;
@@ -79,7 +78,6 @@ use pocketmine\event\player\PlayerEntityInteractEvent;
 use pocketmine\event\player\PlayerEmoteEvent;
 use pocketmine\event\player\PlayerEditBookEvent;
 use pocketmine\event\player\PlayerDropItemEvent;
-use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerBucketEmptyEvent;
 use pocketmine\event\player\PlayerBucketFillEvent;
@@ -333,6 +331,7 @@ class Core extends PluginBase implements Listener {
     // Event Handler 
     protected function eventHandler($event) : void {
         $name = $event->getEventName();
+        $executor = null;
         $eventName = explode('\\', $name)[3];
 
         $player = null;
@@ -356,12 +355,23 @@ class Core extends PluginBase implements Listener {
                 break;
             case 'entity':
                 $position = $event->getEntity()->getPosition();
+                $executor = "kill";
                 break;
             case 'inventory':
-                $position = $event->getPlayer()->getPosition();
+                if ($name === 'pocketmine\event\inventory\FurnaceBurnEvent' || $name === 'pocketmine\event\inventory\FurnaceSmeltEvent') {
+                    $position = $event->getBlock()->getPosition();
+                } elseif ($name === 'pocketmine\event\inventory\InventoryTransactionEvent') {
+                    $position = $event->getTransaction()->getSource();
+                } else {
+                    $position = $event->getPlayer()->getPosition();
+                }
                 break;
             case 'player':
-                $position = $event->getPlayer()->getPosition();
+                if ($name === 'pocketmine\event\player\PlayerExperienceChangeEvent') {
+                    $position = $event->getEntity()->getPosition();
+                } else {
+                    $position = $event->getPlayer()->getPosition();
+                }
                 break;
         }
 
@@ -379,7 +389,11 @@ class Core extends PluginBase implements Listener {
                     } elseif (@$player !== null) {
                         $player->sendMessage($this->config->get('denied-message', '§cSorry but you cannot do this!'));
                     }
-                    $event->cancel();
+                    if (method_exists($event, 'cancel')) {
+                        $event->cancel();
+                    } elseif ($executor !== null) {
+                        $event->{$executor}();
+                    }
                 }
             }
         }
@@ -411,11 +425,10 @@ class Core extends PluginBase implements Listener {
     public function onFurnaceBurn(FurnaceBurnEvent $event) : void { $this->eventHandler($event); }
     public function onFurnaceSmelt(FurnaceSmeltEvent $event) : void { $this->eventHandler($event); }
     public function onInventoryOpen(InventoryOpenEvent $event) : void { $this->eventHandler($event); }
-    //public function onInventoryTransaction(InventoryTransactionEvent $event) : void { $this->eventHandler($event); }
+    public function onInventoryTransaction(InventoryTransactionEvent $event) : void { $this->eventHandler($event); }
 
     // PLAYER EVENTS
     public function onPlayerMove(PlayerMoveEvent $event) : void { $this->eventHandler($event); }
-    public function onPlayerJump(PlayerJumpEvent $event) : void { $this->eventHandler($event); }
     public function onPlayerItemHeld(PlayerItemHeldEvent $event) : void { $this->eventHandler($event); }
     public function onPlayerItemUse(PlayerItemUseEvent $event) : void { $this->eventHandler($event); }
     public function onPlayerItemConsume(PlayerItemConsumeEvent $event) : void { $this->eventHandler($event); }
@@ -427,7 +440,6 @@ class Core extends PluginBase implements Listener {
     public function onPlayerEditBook(PlayerEditBookEvent $event) : void { $this->eventHandler($event); }
     public function onPlayerDropItem(PlayerDropItemEvent $event) : void { $this->eventHandler($event); }
     public function onPlayerChat(PlayerChatEvent $event) : void { $this->eventHandler($event); }
-    public function onPlayerDeath(PlayerDeathEvent $event) : void { $this->eventHandler($event); }
     public function onPlayerBucketEmpty(PlayerBucketEmptyEvent $event) : void { $this->eventHandler($event); }
     public function onPlayerBucketFill(PlayerBucketFillEvent $event) : void { $this->eventHandler($event); }
     public function onPlayerBlockPick(PlayerBlockPickEvent $event) : void { $this->eventHandler($event); }
