@@ -18,7 +18,8 @@
         "flag-removed":"Success!\nFlag '%flagname%' successfully removed for region",
         "flag-added":"Success!\nFlag '%flagname%' successfully added for region",
         "player-added":"Success!\nPlayer %pname% successfully added to region whitelist!",
-        "player-removed":"Success!\nPlayer %pname% successfully removed from region whitelist!"
+        "player-removed":"Success!\nPlayer %pname% successfully removed from region whitelist!",
+        "flag-not-exists":"Error: flag '%flagname%' does not exists!"
     },
     "it":{
         "no-console":"Questo comando può essere eseguito solo da player in gioco!",
@@ -39,6 +40,7 @@
         "flag-removed":"Successo!\nLa proprietà '%flagname%' è stata rimossa con successo dalla regione",
         "flag-added":"Successo!\nLa proprietà '%flagname%' successfully è stata aggiunta con successo alla regione",
         "player-added":"Successo!\nIl player %pname% è stato aggiunto con successo alla whitelist della regione!",
-        "player-removed":"Successo!\nIl player %pname% è stato rimosso con successo dalla whitelist della regione!"
+        "player-removed":"Successo!\nIl player %pname% è stato rimosso con successo dalla whitelist della regione!",
+        "flag-not-exists":"Errore: la proprietà '%flagname%' non esiste!"
     }
 }

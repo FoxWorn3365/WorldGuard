@@ -205,6 +205,8 @@ class Core extends PluginBase implements Listener {
             } else {
                 $sender->sendMessage("§c" . $this->lan->get('not-defined-region'));
             }
+        } else {
+            $sender->sendMessage("§2§lWorld§d§lGuard§r\n§lVersion " . self::VERSION . " by " . self::AUTHOR . "\n\n§rGitHub: https://github.com/FoxWorn3365/WorldGuard\n\n§r§cPlease submit any type of bug or question on GitHub Issues!");
         }
     }
 
@@ -312,16 +314,20 @@ class Core extends PluginBase implements Listener {
                 $manager = new Flags($this->regions->{$name});
                 $sender->sendMessage("Flags for region '{$name}':\n{$manager->generate()}");
             } else {
-                if (Flags::has($args[1])) {
-                    $flag = $args[1];
-                    if ($this->regions->{$name}->hasFlag($flag)) {
-                        // Remove the flag
-                        $this->regions->{$name}->removeFlag($flag);
-                        $sender->sendMessage($this->lan->get('flag-removed', ['flagname' => $flag]) . " '{$name}'!");
+                for ($a = 1; $a < count($args); $a++) {
+                    $flag = $args[$a];
+                    if (Flags::has($flag)) {
+                        if ($this->regions->{$name}->hasFlag($flag)) {
+                            // Remove the flag
+                            $this->regions->{$name}->removeFlag($flag);
+                            $sender->sendMessage($this->lan->get('flag-removed', ['flagname' => $flag]) . " '{$name}'!");
+                        } else {
+                            // Add the flag
+                            $this->regions->{$name}->addFlag($flag);
+                            $sender->sendMessage($this->lan->get('flag-added', ['flagname' => $flag]) . " '{$name}'!");
+                        }
                     } else {
-                        // Add the flag
-                        $this->regions->{$name}->addFlag($flag);
-                        $sender->sendMessage($this->lan->get('flag-added', ['flagname' => $flag]) . " '{$name}'!");
+                        $sender->sendMessage('§c' . $this->lan->get('flag-added', ['flagname' => $flag]));
                     }
                 }
             }
@@ -361,7 +367,7 @@ class Core extends PluginBase implements Listener {
                 if ($name === 'pocketmine\event\inventory\FurnaceBurnEvent' || $name === 'pocketmine\event\inventory\FurnaceSmeltEvent') {
                     $position = $event->getBlock()->getPosition();
                 } elseif ($name === 'pocketmine\event\inventory\InventoryTransactionEvent') {
-                    $position = $event->getTransaction()->getSource();
+                    $position = $event->getTransaction()->getSource()->getPosition();
                 } else {
                     $position = $event->getPlayer()->getPosition();
                 }
