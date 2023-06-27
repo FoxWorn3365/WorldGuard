@@ -121,7 +121,6 @@ class RegionManager {
         for ($a = 0; $a < count($this->config->players); $a++) {
             if ($this->config->players[$a] == $player) {
                 $this->config->players[$a] = null;
-                unset($this->config->players[$a]);
             }
         }
         $this->save();
@@ -143,7 +142,6 @@ class RegionManager {
         for ($a = 0; $a < count($this->config->flags); $a++) {
             if ($this->config->flags[$a] == $flag) {
                 $this->config->flags[$a] = null;
-                unset($this->config->flags[$a]);
             }
         }
         $this->save();
